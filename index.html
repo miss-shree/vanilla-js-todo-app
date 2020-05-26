@@ -1,0 +1,109 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <title>My to-do list</title>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body>
+<form id="form" class="new-item-form">
+        <h1>Add new task here</h1>
+        <input id="taskTitleInput" type="text" placeholder="Enter task title"/>
+        <input id="taskDescriptionInput" type="text" placeholder="Enter Description"/>
+        <input id="taskDeadlineInput" type="date" placeholder="enter deadline"/>
+    </form>
+    <button class="add-button" onclick="addTask()"> Add Task</button>
+
+<div id="todoListElement" class="todo-list"></div>
+  
+
+
+<!-- js script starts-->
+<script>
+    //referring elements
+var todoListElement = document.getElementById("todoListElement");
+var taskTitleInputElement = document.getElementById("taskTitleInput");
+var taskDescriptionInputElement = document.getElementById("taskDescriptionInput");
+var taskDeadlineInputElement = document.getElementById("taskDeadlineInput");
+var Form = document.getElementById("form");
+
+//array of items
+var todoItems = [], index;
+
+//creating function for adding task through add button
+function addTask(){
+    var taskTitle= taskTitleInputElement.value;
+    var taskDescription = taskDescriptionInputElement.value;
+    var taskDeadline= taskDeadlineInputElement.value;
+
+    var newTask = {
+        taskTitle:taskTitle,
+        taskDescription:taskDescription,
+        taskDeadline: taskDeadline
+    };
+
+   
+
+    todoItems.push(newTask);
+     //calling render function
+     render();
+    
+    //for clearing the input form
+    taskTitleInputElement.value="";
+    taskDescriptionInputElement.value="";
+    taskDeadlineInputElement.value="";
+}
+
+//creating render function for showing the items on the screen
+
+function render(){
+    var text= "";
+
+    //creatingfor loop for showing items
+    for(var i=0; i<todoItems.length; i++){
+        text +=  `<div class="todo-item">
+                 <div class="tasktitle">${todoItems[i].taskTitle}</div>
+                 <div class="taskdescription">${todoItems[i].taskDescription}</div>
+                 <div class="taskdeadline">${todoItems[i].taskDeadline}</div>
+                 <button class="dltbutton" onclick="deleteTask(${i})">Delete</button>
+                 <button class="editbutton" onclick="editTask(${index})">Edit</button>
+   </div>`;
+    }
+    todoListElement.innerHTML = text;
+
+}
+
+// for deleting task from list
+function deleteTask(index){
+    var todoDeleteList = [];
+
+    //for loop for deleting element
+    for (var i=0; i<todoItems.length; i++){
+        if (i !== index){
+            todoDeleteList.push(todoItems[i]);
+        }
+    }
+    todoItems = todoDeleteList;
+    render();
+}
+
+function editTask(index) {
+    console.log(index);
+
+         var  editTaskTitle= document.getElementById("taskTitleInputElement").value;
+           var editTaskDescription= document.getElementById("taskDescriptionInputElement").value;
+         var editTaskDeadline =   document.getElementById("taskDeadlineInputElement").value;
+
+    editTaskTitle.value=todoItems[index].taskTitle;
+    taskDescriptionInputElement.value=todoItems[index].taskDescription;
+    taskDeadlineInputElement.value=todoItems[index].taskDeadline;           
+    deleteTask(index);
+
+        }
+
+
+
+
+</script>
+    </body>
+    
+    </html>
