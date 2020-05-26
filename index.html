@@ -71,7 +71,7 @@ function render(){
                  <div class="taskdescription">${todoItems[i].taskDescription}</div>
                  <div class="taskdeadline">${todoItems[i].taskDeadline}</div>
                  <button class="dltbutton" onclick="deleteTask(${i})">Delete</button>
-                 <button class="editbutton" onclick="editTask(${index})">Edit</button>
+                 <button class="editbutton" onclick="editTask(${i})">Edit</button>
    </div>`;
     }
     todoListElement.innerHTML = text;
@@ -92,20 +92,23 @@ function deleteTask(index){
     render();
 }
 
-function editTask(index) {
-    console.log(index);
-
-         var  editTaskTitle= document.getElementById("taskTitleInputElement").value;
-           var editTaskDescription= document.getElementById("taskDescriptionInputElement").value;
-         var editTaskDeadline =   document.getElementById("taskDeadlineInputElement").value;
-
-    editTaskTitle.value=todoItems[index].taskTitle;
-    taskDescriptionInputElement.value=todoItems[index].taskDescription;
-    taskDeadlineInputElement.value=todoItems[index].taskDeadline;           
-    deleteTask(index);
-
+          //   Edit Function
+      function editTask(index) {
+        console.log("Edit Active");
+        for (var i = 0; i < todoItems.length; i++) {
+          console.log("Edit Active IF");
+          if (i == index) {
+            console.log("Edit Active IF");
+            taskTitleInputElement.value = `${todoItems[i].taskTitle}`;
+            taskDescriptionInputElement.value = `${todoItems[i].taskDescription}`;
+            taskDeadlineInputElement.value = `${todoItems[i].taskDeadline}`;
+            //call the update
+          }
         }
+        deleteTask(index);
+      }
 
+        
 
 
 
