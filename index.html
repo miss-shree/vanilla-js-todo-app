@@ -5,16 +5,22 @@
         <link rel="stylesheet" href="style.css"/>
     </head>
     <body>
+        <div class="container">
+            <h1>My ToDo List</h1>
 <form id="form" class="new-item-form">
         <h1>Add new task here</h1>
+        <lable class="lable">Title</lable>
         <input id="taskTitleInput" type="text" placeholder="Enter task title"/>
+        <lable class="lable">Description</lable>
         <input id="taskDescriptionInput" type="text" placeholder="Enter Description"/>
+        <lable class="lable">Deadline</lable>
         <input id="taskDeadlineInput" type="date" placeholder="enter deadline"/>
     </form>
     <button class="add-button" onclick="addTask()"> Add Task</button>
 
 <div id="todoListElement" class="todo-list"></div>
   
+</div>
 
 
 <!-- js script starts-->
